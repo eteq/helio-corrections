@@ -2,7 +2,24 @@
 
 def helio_corr(t, loc, target=None):
     """
-    The thing you add to a target to get the heliocentric velocity
+    Compute the heliocentric velocity correction at a given time and place.
+    
+    Paramters
+    ---------
+    t : astropy.time.Time
+        Time of the observation. Can be a Time array.
+    loc : astropy.coordinates.EarthLocation
+        The observer location at which to compute the correction.
+    target : SkyCoord or None
+        The on-sky location at which to compute the correction.  If None,
+        the function will return the cartesian vector instead of the radial
+        velocity correction.
+        
+    Returns
+    -------
+    vcorr : astropy.units.Quantity with velocity units
+        The heliocentric correction with a positive sign.  I.e., *add* this
+        to an observed radial velocity to get the heliocentric velocity.
     """
     vsun = coordinates.get_body_barycentric_posvel('sun', t)[1]
     vearth = coordinates.get_body_barycentric_posvel('earth', t)[1]
