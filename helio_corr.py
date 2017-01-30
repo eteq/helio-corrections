@@ -1,4 +1,5 @@
 # from vhelio calculation.ipynb
+from astropy import coordinates
 
 def helio_corr(t, loc, target=None):
     """
